@@ -2,10 +2,10 @@ Esse projeto foi feito com [Create React App](https://github.com/facebookincubat
 
 ## Instruções para rodar o projeto
 
-Para poder rodar o projeto basta instalar o [Node.js](https://nodejs.org/en/) e copiar o código utilizando o [Link](https://gitlab.com/andradebruno/indra-react/repository/master/archive.zip). Ou utilizar o comando abaixo para clonar o projeto do git
+Para poder rodar o projeto basta instalar o [Node.js](https://nodejs.org/en/) e copiar o código utilizando o [Link](https://github.com/andradebruno/indra-react/archive/master.zip). Ou utilizar o comando abaixo para clonar o projeto do git
 
 ```
-git clone git@gitlab.com:andradebruno/indra-react.git
+git clone git@github.com:andradebruno/indra-react.git
 ```
 
 Após copiar o código é necessário entrar no diretório raiz do projeto e seguir o comando abaixo e acessar o [Link](http://localhost:3000/) da aplicação:
