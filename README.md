@@ -8,7 +8,7 @@ Para poder rodar o projeto basta instalar o [Node.js](https://nodejs.org/en/) e 
 git clone git@gitlab.com:andradebruno/indra-react.git
 ```
 
-Após copiar o código é necessário entrar no diretório raiz do projeto e seguir o comando abaixo:
+Após copiar o código é necessário entrar no diretório raiz do projeto e seguir o comando abaixo e acessar o [Link](http://localhost:3000/) da aplicação:
 
 ```
 ...\indra-react>npm start
