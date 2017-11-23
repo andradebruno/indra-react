@@ -14,6 +14,12 @@ Após copiar o código é necessário entrar no diretório raiz do projeto e seg
 ...\indra-react>npm start
 ```
 
+Para colocar como se fosse para produção (Todo compactado) basta rodar o comando abaixo e seguir as instrução ao final dele de instalação do server.
+
+```
+...\indra-react>npm run build
+```
+
 ## Comentários
 
 No projeto foi feito uma componetização do Input e Button para que fosse mais fácil a reutilização dos mesmo, fazendo assim com que o código ficasse mais limpo.
