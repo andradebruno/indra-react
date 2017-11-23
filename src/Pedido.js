@@ -16,17 +16,10 @@ class FormularioPedido extends Component {
 			ovo: 0,
 			queijo: 0,
 			total: 0
-			
 		};
 		this.state = this.initialState;
 		this.enviaForm = this.enviaForm.bind(this);
-		this.setIdLanche = this.setIdLanche.bind(this);
-		this.setAlface = this.setAlface.bind(this);
-		this.setBacon = this.setBacon.bind(this);
-		this.setCarne = this.setCarne.bind(this);
-		this.setOvo = this.setOvo.bind(this);
-		this.setQueijo = this.setQueijo.bind(this);
-		this.setTotal = this.setTotal.bind(this);
+		this.salvaAlteracao = this.salvaAlteracao.bind(this);
 	}
 
 	enviaForm(evento) {
@@ -53,15 +46,16 @@ class FormularioPedido extends Component {
 					bacon: "",
 					carne: "",
 					ovo: "",
-					queijo: "",
-					total: ""
+					queijo: ""
 				});
 			}.bind(this),
 			error: function(resposta) {
 				if (resposta.status == 400) {
 					new TratadorErros().publicaErros(resposta.responseJSON);
-					if(this.state.idLanche == "") {
-						this.setState({msgErro: " É necessário selecionar um lanche!"})
+					if (this.state.idLanche == "") {
+						this.setState({
+							msgErro: " É necessário selecionar um lanche!"
+						});
 					}
 				}
 			},
@@ -73,9 +67,9 @@ class FormularioPedido extends Component {
 
 	change(evento) {
 		evento.preventDefault();
-		this.setIdLanche(evento);
+		this.salvaAlteracao("idLanche", evento);
 		if (evento.target.value !== "") {
-			this.setState({msgErro:""});
+			this.setState({ msgErro: "" });
 			$.ajax({
 				url: "http://localhost:8080/api/lanche/" + evento.target.value,
 				dataType: "json",
@@ -115,8 +109,10 @@ class FormularioPedido extends Component {
 			error: function(resposta) {
 				if (resposta.status == 400) {
 					new TratadorErros().publicaErros(resposta.responseJSON);
-					if(this.state.idLanche == "") {
-						this.setState({msgErro: " É necessário selecionar um lanche!"})
+					if (this.state.idLanche == "") {
+						this.setState({
+							msgErro: " É necessário selecionar um lanche!"
+						});
 					}
 				}
 			}.bind(this),
@@ -126,32 +122,14 @@ class FormularioPedido extends Component {
 		});
 	}
 
-	setIdLanche(evento) {
-		this.setState({ idLanche: evento.target.value });
-	}
-	setAlface(evento) {
-		this.setState({ alface: evento.target.value });
-	}
-	setBacon(evento) {
-		this.setState({ bacon: evento.target.value });
-	}
-	setCarne(evento) {
-		this.setState({ carne: evento.target.value });
-	}
-	setOvo(evento) {
-		this.setState({ ovo: evento.target.value });
-	}
-	setQueijo(evento) {
-		this.setState({ queijo: evento.target.value });
-	}
-	setTotal(evento) {
-		this.setState({ total: evento.target.value });
+	salvaAlteracao(nomeInput, evento) {
+		this.setState({ [nomeInput]: evento.target.value });
 	}
 
 	render() {
 		return (
 			<div className="pure-form pure-form-aligned">
-			<br />
+				<br />
 				<form
 					className="pure-form pure-form-aligned"
 					onSubmit={this.enviaForm}
@@ -187,7 +165,7 @@ class FormularioPedido extends Component {
 						type="number"
 						name="alface"
 						value={this.state.alface}
-						onChange={this.setAlface}
+						onChange={this.salvaAlteracao.bind(this, "alface")}
 						min="0"
 						step="any"
 						label="Alface"
@@ -197,7 +175,7 @@ class FormularioPedido extends Component {
 						type="number"
 						name="bacon"
 						value={this.state.bacon}
-						onChange={this.setBacon}
+						onChange={this.salvaAlteracao.bind(this, "bacon")}
 						min="0"
 						step="any"
 						label="Bacon"
@@ -208,7 +186,7 @@ class FormularioPedido extends Component {
 						type="number"
 						name="carne"
 						value={this.state.carne}
-						onChange={this.setCarne}
+						onChange={this.salvaAlteracao.bind(this, "carne")}
 						min="0"
 						step="any"
 						label="Hambúrger de carne"
@@ -219,7 +197,7 @@ class FormularioPedido extends Component {
 						type="number"
 						name="ovo"
 						value={this.state.ovo}
-						onChange={this.setOvo}
+						onChange={this.salvaAlteracao.bind(this, "ovo")}
 						min="0"
 						step="any"
 						label="Ovo"
@@ -230,7 +208,7 @@ class FormularioPedido extends Component {
 						type="number"
 						name="queijo"
 						value={this.state.queijo}
-						onChange={this.setQueijo}
+						onChange={this.salvaAlteracao.bind(this, "queijo")}
 						min="0"
 						step="any"
 						label="Queijo"
@@ -265,7 +243,7 @@ class TabelaPedidos extends Component {
 	render() {
 		return (
 			<div>
-			<br />
+				<br />
 				<table className="pure-table">
 					<thead>
 						<tr>
@@ -283,11 +261,15 @@ class TabelaPedidos extends Component {
 							return (
 								<tr key={pedido.idPedido}>
 									<td>{pedido.lanchePedido.nomeLanche}</td>
-									{pedido.lanchePedido.ingredientesLanche.map(i => {
-										return (
-											<td key={i.idIngrediente}>{i.quantidadeIngrediente}</td>
-										);
-									})}
+									{pedido.lanchePedido.ingredientesLanche.map(
+										i => {
+											return (
+												<td key={i.idIngrediente}>
+													{i.quantidadeIngrediente}
+												</td>
+											);
+										}
+									)}
 									<td>{pedido.totalPedido}</td>
 								</tr>
 							);
